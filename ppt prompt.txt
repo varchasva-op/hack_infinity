@@ -1,0 +1,42 @@
+🧩 What each import means
+Import	From	Purpose (how to explain to judges)
+fitz	PyMuPDF	Reads text and images directly from PDF pages.
+pytesseract	OCR tool	Reads handwriting or text from images if the PDF has scanned pages.
+streamlit	Web app framework	Creates interactive UI and dashboard easily in Python.
+openai	OpenAI API	Uses pre-trained GPT models to generate flashcards, quizzes, and answers.
+sentence-transformers	Hugging Face	Creates embeddings for semantic search (used in our RAG chatbot).
+faiss	Facebook AI Library	Performs fast similarity search to find relevant study notes for a question.
+gtts	Google Text-to-Speech	Converts text answers or flashcards into spoken audio (mp3).
+langchain	AI agent framework	Handles prompt formatting and future multi-agent orchestration.
+fastapi	API framework	Optional: if we extend to backend APIs later.
+tinydb	Lightweight database	Stores progress, scores, and small user data locally.
+pillow (PIL)	Image library	Helps manipulate images for OCR.
+
+You can say in presentation:
+
+“We used Streamlit for the web interface, PyMuPDF and Tesseract for reading notes, OpenAI’s GPT models for generating educational content, and FAISS with SentenceTransformers for semantic search in our doubt-solving module.”s
+
+⚙️ What happens step-by-step when the app runs
+
+User uploads a PDF
+→ reader.py extracts text → splits into paragraphs.
+
+Flashcard Agent (flashcard.py)
+→ Sends text chunks to GPT model → receives Q/A cards.
+
+Quiz Agent (quiz.py)
+→ Creates adaptive quizzes with multiple choice answers.
+
+Planner Agent (planner.py)
+→ Makes a revision schedule using date + topic.
+
+Chat Agent (RAG) (chat.py)
+→ Converts all text into embeddings (SentenceTransformer)
+→ Uses FAISS to find the most relevant chunks
+→ Passes them to GPT → contextual answer.
+
+Voice Agent (voice.py)
+→ Converts flashcard answers into audio for revision.
+
+Gamification & Dashboard
+→ Shows progress, XP, streak, and saved outputs.
